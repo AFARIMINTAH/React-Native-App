@@ -12,7 +12,7 @@ export default function App() {
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.logoContainer}>
           <Image
-            source={require('../assets/images/IMG-20240530-WA0053.jpg')}
+            source={require('../assets/images/[removal.ai]_f5a78b18-0ec0-4e40-855b-600a98d67f60-img-20240530-wa0053_EXIHJ6.png')}
             style={styles.image}
           />
           <Text style={styles.imageText}>Discover Endless Possibilities with </Text>

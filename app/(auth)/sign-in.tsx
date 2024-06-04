@@ -1,71 +1,101 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import FormField from '@/components/FormField'
-import { useState } from 'react'
+import React, { useState } from 'react';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import FormField from '@/components/FormField';
+import CustomButton from '@/components/CustomButton';
+import { Link } from 'expo-router';
 
 const SignIn = () => {
-  const [form, setform] = useState({
-    email:'',
-    password:'',
-  })
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const submit = () => {
+    setIsSubmitting(true);
+    // Add your form submission logic here
+    // After submission, reset isSubmitting to false
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
           <Image 
-            source={require('../assets/IMG-20240530-WA0053.jpg')}
+            source={require('../assets/[removal.ai]_f5a78b18-0ec0-4e40-855b-600a98d67f60-img-20240530-wa0053_EXIHJ6.png')}
             style={styles.image}
           />
           <Text style={styles.text}>Login</Text>
           <FormField
-          title="Email"
-          value={form.email}
-          handleChangeText={(e) => setform({...form,
-            email:e
-          })}
-          keyboardType="email-address"
+            title="Email"
+            value={email}
+            placeholder="Enter your email"
+            handleChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
-            <FormField
-          title="Password"
-          value={form.password}
-          handleChangeText={(e) => setform({...form,
-            password:e
-          })}
-          
+          <FormField
+            title="Password"
+            value={password}
+            placeholder="Enter your password"
+            handleChangeText={setPassword}
+            secureTextEntry
+            autoCapitalize="none"
           />
+          <CustomButton 
+            title="Sign In"
+            handlePress={submit}
+            isLoading={isSubmitting} // Use isLoading here instead of isloading
+          />
+          <View style={styles.signupContainer}>
+            <Text style={styles.dontHaveAccountText}>Don't have an account?</Text>
+            <Link href="/sign-up" style={styles.signupLink}>Sign Up</Link>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#11212D', // Set the background color of the SafeAreaView
+    backgroundColor: '#11212D',
   },
   scrollViewContent: {
     flexGrow: 1,
+    
   },
   container: {
     flex: 1,
-    alignItems: 'flex-start', // Align content to the left
-    justifyContent: 'flex-start', // Align content at the top
-    backgroundColor: '#11212D', // Set the background color of the container
-    padding: 16, // Add some padding to the container
+    alignItems: 'center', // Center align content
+    justifyContent: 'center', // Center content vertically
+    backgroundColor: '#11212D',
+    padding: 16,
+    marginTop: -40, // Adjusted negative margin to move everything up
   },
   image: {
-    width: 150, // Set the image width to a fixed size
-    height: 150, // Set the image height to a fixed size
-    resizeMode: 'cover', // Adjust the resize mode as needed
-    marginBottom: 16, // Add some space between the image and text
+    width: 100,
+    height: 200,
+    resizeMode: 'cover',
+    marginBottom: 16, // Add some space below the image
   },
   text: {
-    color: 'white', // Set the text color to white
-    fontSize: 18, // Set the text size
+    color: 'white',
+    fontSize: 18,
+    marginBottom: 16,
   },
-})
+  signupContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  dontHaveAccountText: {
+    color: 'white',
+  },
+  signupLink: {
+    color: '#007BFF', // Adjusted link color
+    marginLeft: 4, // Adjusted margin between text and link
+  },
+});
