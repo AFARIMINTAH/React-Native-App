@@ -1,10 +1,15 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
     "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
+      "@react-native/virtualized-lists/*": [
+        "node_modules/@react-native/virtualized-lists/*"
       ]
     }
   },
@@ -12,6 +17,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+    "expo-env.d.ts",
+    "lib/appwrite.ts",
+    "tailwind.config.js"
+  ],
+  "extends": "expo/tsconfig.base"
 }
